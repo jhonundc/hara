@@ -24,9 +24,9 @@ jobs:
       - name: 🔗 Comprobar enlaces rotos
         uses: peter-evans/link-checker@v1
         with:
-          args: ./index.html
+          files: '**/*.html'
 
-      - name: 🧼 Minificar HTML, CSS, JS
+      - name: 🧼 Minificar HTML, CSS y JS
         uses: nizarmah/mini-html@v2.0.3
         with:
           dir: .
