@@ -1,15 +1,13 @@
-name: Validar y desplegar página de jabones
+name: Desplegar manualmente página de jabones
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # Esto permite ejecutarlo manualmente
 
 permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
