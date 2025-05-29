@@ -1,0 +1,38 @@
+name: Validar y desplegar página de jabones
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: ✅ Validar HTML
+        uses: Cyb3r-Jak3/html5validator-action@v2
+        with:
+          directory: .
+
+      - name: 🔗 Comprobar enlaces rotos
+        uses: peter-evans/link-checker@v1
+        with:
+          args: ./index.html
+
+      - name: 🧼 Minificar HTML, CSS, JS
+        uses: nizarmah/mini-html@v2.0.3
+        with:
+          dir: .
+
+      - name: 🚀 Publicar en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
